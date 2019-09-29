@@ -35,6 +35,7 @@ def keras_predict(model, image):
 	pred_class = list(pred_probab).index(max(pred_probab))
 	return max(pred_probab), pred_class
 
+# TODO: this is how we got image after prediction from DB.
 def get_pred_text_from_db(pred_class):
 	conn = sqlite3.connect("gesture_db.db")
 	cmd = "SELECT g_name FROM gesture WHERE g_id="+str(pred_class)
@@ -51,7 +52,7 @@ def get_pred_from_contour(contour, thresh):
 	elif h1 > w1:
 		save_img = cv2.copyMakeBorder(save_img, 0, 0, int((h1-w1)/2) , int((h1-w1)/2) , cv2.BORDER_CONSTANT, (0, 0, 0))
 	pred_probab, pred_class = keras_predict(model, save_img)
-	if pred_probab*100 > 70:
+	if pred_probab*100 > 70: # ensure predicted value has enough confidence so we can show it.
 		text = get_pred_text_from_db(pred_class)
 	return text
 

@@ -5,7 +5,8 @@ import pickle, os, sqlite3, random
 image_x, image_y = 50, 50
 
 def get_hand_hist():
-	with open("hist", "rb") as f:
+	path = os.getcwd()+"\\Code\\hist"
+	with open(path, "rb") as f:
 		hist = pickle.load(f)
 	return hist
 
@@ -18,7 +19,7 @@ def init_create_folder_database():
 		create_table_cmd = "CREATE TABLE gesture ( g_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, g_name TEXT NOT NULL )"
 		conn.execute(create_table_cmd)
 		conn.commit()
-
+		
 def create_folder(folder_name):
 	if not os.path.exists(folder_name):
 		os.mkdir(folder_name)
