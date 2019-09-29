@@ -13,6 +13,7 @@ def pickle_images_labels():
 	for image in images:
 		print(image)
 		label = image[image.find(os.sep)+1: image.rfind(os.sep)]
+		# print("hello")
 		img = cv2.imread(image, 0)
 		images_labels.append((np.array(img, dtype=np.uint8), int(label)))
 	return images_labels

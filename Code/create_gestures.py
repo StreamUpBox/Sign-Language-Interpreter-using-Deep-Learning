@@ -5,7 +5,7 @@ import pickle, os, sqlite3, random
 image_x, image_y = 50, 50
 
 def get_hand_hist():
-	path = os.getcwd()+"\\Code\\hist"
+	path = os.getcwd()+"\\Code\\hist" #this may not work on linux We need better solution than this.
 	with open(path, "rb") as f:
 		hist = pickle.load(f)
 	return hist
